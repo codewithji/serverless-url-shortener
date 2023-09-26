@@ -1,7 +1,5 @@
 terraform {
-  cloud {
-    # Configure to use environment vars in CI/CD pipeline
-  }
+  cloud {}
 
   required_providers {
     aws = {
