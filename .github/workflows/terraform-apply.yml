@@ -13,7 +13,6 @@ env:
 
 jobs:
   terraform:
-    if: github.repository != 'codewithji/serverless-url-shortener'
     name: "Terraform Apply"
     runs-on: ubuntu-latest
     permissions:
