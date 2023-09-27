@@ -180,6 +180,26 @@ resource "aws_lambda_permission" "api_gw_redirect" {
   source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
 }
 
+resource "aws_api_gateway_usage_plan" "api_settings" {
+  name = "API Gateway Usage Plan"
+
+  api_stages {
+    api_id = aws_apigatewayv2_api.lambda.id
+    stage  = aws_apigatewayv2_stage.lambda.stage_name
+  }
+
+  quota_settings {
+    limit  = 20
+    offset = 2
+    period = "WEEK"
+  }
+
+  throttle_settings {
+    burst_limit = 5
+    rate_limit  = 10
+  }
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # DynamoDB
 # ---------------------------------------------------------------------------------------------------------------------
@@ -273,4 +293,34 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
+}
+
+resource "random_pet" "cf_policy_name" {
+  prefix = "cf-private-content-policy"
+  length = 3
+}
+
+resource "aws_s3_bucket_policy" "frontend_bucket_policy" {
+  bucket = aws_s3_bucket.frontend_bucket.id
+
+  policy = jsonencode({
+    Version : "2008-10-17",
+    Id : "${random_pet.cf_policy_name}",
+    Statement : [
+      {
+        Sid : "",
+        Effect : "Allow",
+        Principal : {
+          Service : "cloudfront.amazonaws.com"
+        },
+        Action : "s3:GetObject",
+        Resource : "arn:aws:s3:::${aws_s3_bucket.frontend_bucket.id}/*",
+        Condition : {
+          StringEquals : {
+            "AWS:SourceArn" : "${aws_cloudfront_distribution.cf_distribution.arn}"
+          }
+        }
+      }
+    ]
+  })
 }
