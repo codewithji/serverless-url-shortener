@@ -305,7 +305,7 @@ resource "aws_s3_bucket_policy" "frontend_bucket_policy" {
 
   policy = jsonencode({
     Version : "2008-10-17",
-    Id : "${random_pet.cf_policy_name}",
+    Id : "${random_pet.cf_policy_name.id}",
     Statement : [
       {
         Sid : "",
