@@ -14,6 +14,10 @@ variable "dynamodb_table_name" {
   type = string
 }
 
+variable "cf_domain_name" {
+  type = string
+}
+
 variable "environment" {
   description = "This is the environment where my app is deployed"
   type        = string
