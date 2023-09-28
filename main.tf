@@ -123,6 +123,12 @@ resource "aws_iam_role" "lambda_exec" {
 resource "aws_apigatewayv2_api" "lambda" {
   name          = "${var.environment}_serverless_lambda_gw"
   protocol_type = "HTTP"
+
+  cors_configuration {
+    allow_origins = ["${var.cf_domain_name}"]
+    allow_methods = ["OPTIONS", "GET", "POST"]
+    allow_headers = ["Content-Type"]
+  }
 }
 
 resource "aws_apigatewayv2_stage" "lambda" {
