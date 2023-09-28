@@ -180,26 +180,6 @@ resource "aws_lambda_permission" "api_gw_redirect" {
   source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
 }
 
-resource "aws_api_gateway_usage_plan" "api_settings" {
-  name = "API Gateway Usage Plan"
-
-  api_stages {
-    api_id = aws_apigatewayv2_api.lambda.id
-    stage  = aws_apigatewayv2_stage.lambda.id
-  }
-
-  quota_settings {
-    limit  = 20
-    offset = 2
-    period = "WEEK"
-  }
-
-  throttle_settings {
-    burst_limit = 5
-    rate_limit  = 10
-  }
-}
-
 # ---------------------------------------------------------------------------------------------------------------------
 # DynamoDB
 # ---------------------------------------------------------------------------------------------------------------------
