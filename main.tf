@@ -130,6 +130,11 @@ resource "aws_apigatewayv2_stage" "lambda" {
 
   name        = "${var.environment}_serverless_lambda"
   auto_deploy = true
+
+  default_route_settings {
+    throttling_burst_limit = 5
+    throttling_rate_limit  = 10
+  }
 }
 
 resource "aws_apigatewayv2_integration" "shorten_url" {
