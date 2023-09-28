@@ -185,7 +185,7 @@ resource "aws_api_gateway_usage_plan" "api_settings" {
 
   api_stages {
     api_id = aws_apigatewayv2_api.lambda.id
-    stage  = aws_apigatewayv2_stage.lambda.stage_name
+    stage  = aws_apigatewayv2_stage.lambda.id
   }
 
   quota_settings {
