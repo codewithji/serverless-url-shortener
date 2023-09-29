@@ -8,7 +8,7 @@ interface Props {
 
 const PrimaryButton: FC<Props> = ({ text, handleClick }) => {
   return (
-    <button className={styles.primary} onClick={handleClick}>
+    <button className={styles.primaryButton} onClick={handleClick}>
       {text}
     </button>
   );

@@ -1,6 +1,3 @@
-// TODO: Figure out CORS for local development only
-
-// TODO: Figure out rate limiting
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { randomBytes } from "crypto";

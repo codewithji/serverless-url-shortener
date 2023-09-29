@@ -1,0 +1,18 @@
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font-family: "Montserrat", sans-serif;
+  vertical-align: baseline;
+
+  &:before,
+  &:after {
+    box-sizing: inherit;
+  }
+}
