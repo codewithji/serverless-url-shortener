@@ -44,7 +44,7 @@ const Home: FC = () => {
 
       <div className={styles.inputContainer}>
         <input
-          className={styles.urlInput}
+          className={loading ? styles.loadingTextColor : ''}
           type="text"
           value={url}
           onChange={handleUrlChange}
