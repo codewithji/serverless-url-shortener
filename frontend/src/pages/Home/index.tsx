@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FC } from "react";
-import { Alert } from "@mui/material";
+import { Alert, Box, LinearProgress } from "@mui/material";
 import axios from "axios";
 
 import PrimaryButton from "../../components/buttons/PrimaryButton";
@@ -10,6 +10,7 @@ const Home: FC = () => {
   const [url, setUrl] = useState<string>("");
   const [shortUrl, setShortUrl] = useState<string | null>(null);
   const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const shortUrlEndpoint = import.meta.env.VITE_SHORT_URL_ENDPOINT;
 
@@ -19,6 +20,7 @@ const Home: FC = () => {
 
   const handleClick = async (): Promise<void> => {
     try {
+      setLoading(true);
       const res = await axios.post<{ shortUrl: string }>(shortUrlEndpoint, {
         url,
       });
@@ -26,9 +28,12 @@ const Home: FC = () => {
       setShortUrl(res.data.shortUrl);
       setError("");
     } catch (err) {
+      setShortUrl("");
       setError(
         "Error occurred while attempting to shorten URL. Please try again later."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,17 +50,24 @@ const Home: FC = () => {
           placeholder="https://example.com"
         />
 
+        {loading && (
+          <Box className={styles.loaderContainer}>
+            <LinearProgress className={styles.loader} />
+          </Box>
+        )}
+
         <PrimaryButton text="Shorten" handleClick={handleClick} />
       </div>
 
       <div className={styles.feedbackContainer}>
         {shortUrl && (
-          <Alert
-            severity="success"
-            className={styles.successAlert}
-          >
-            Here's your short URL: <span>{shortUrl}</span>
-            <CopyIconButton copyValue={shortUrl} />
+          <Alert severity="success" className={styles.successAlert}>
+            <div className={styles.successAlertContent}>
+              <div>
+                Here's your short URL: <span>{shortUrl}</span>
+              </div>
+              <CopyIconButton copyValue={shortUrl} />
+            </div>
           </Alert>
         )}
 
