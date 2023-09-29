@@ -4,6 +4,7 @@ import axios from "axios";
 
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import CopyIconButton from "../../components/buttons/CopyIconButton";
+import Footer from "../../components/Footer";
 import styles from "./home.module.scss";
 
 const Home: FC = () => {
@@ -73,6 +74,8 @@ const Home: FC = () => {
 
         {error && <Alert severity="error">{error}</Alert>}
       </div>
+
+      <Footer />
     </div>
   );
 };
