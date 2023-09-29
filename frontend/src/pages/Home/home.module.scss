@@ -1,6 +1,7 @@
 $home-background-color: #e4ebf5;
 $input-focus-color: #678efe;
 $input-placeholder-color: #cbd1dc;
+$loading-color: #3490ff;
 
 .home {
   min-height: 100vh;
@@ -24,35 +25,65 @@ $input-placeholder-color: #cbd1dc;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 6px;
-}
+  position: relative;
 
-.urlInput {
-  border: none;
-  margin: 0;
-  padding: 0.5rem 1rem;
-  font-size: 14px;
-  color: inherit;
-  flex: 1;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  display: block;
-  transition: border 0.3s ease;
-  padding-left: 0.5rem;
-
-  &::placeholder {
-    color: $input-placeholder-color
+  @media only screen and (max-width: 600px) {
+    width: calc(100% - 1rem);
   }
-  &:focus {
-    outline: none;
-    border-color: $input-focus-color;
+
+  .loaderContainer {
+    position: absolute;
+    padding-left: 0.5rem;
+    width: calc(100% - 7.5rem);
+  }
+
+  .loader {
+    background: transparent;
+  }
+
+  .loader > * {
+    background-color: $loading-color !important;
+  }
+
+  input {
+    border: none;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    color: inherit;
+    flex: 1;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: block;
+    transition: border 0.3s ease;
+    padding-left: 0.5rem;
+
+    &::placeholder {
+      color: $input-placeholder-color;
+    }
+    &:focus {
+      outline: none;
+      border-color: $input-focus-color;
+    }
   }
 }
 
 .feedbackContainer {
   margin-top: 2rem;
 
+  @media only screen and (max-width: 700px) {
+    width: calc(100% - 1rem);
+  }
+
   .successAlert {
     display: flex;
+    align-items: center;
+    
+  }
+
+  .successAlertContent {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 

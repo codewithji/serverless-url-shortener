@@ -1,3 +1,6 @@
+$primary-color: #3490ff;
+$active-color: #2e81e5;
+
 .primaryButton {
   margin-left: 0.5rem;
   appearance: none;
@@ -13,43 +16,17 @@
   font-size: 14px;
   font-weight: 500;
   padding: 6px 16px;
-  position: relative;
-  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
-  word-wrap: break-word;
+  transition: all .3s ease-in;
 }
 
 .primaryButton:hover {
-  background-color: #f3f4f6;
+  background-color: $primary-color;
+  color: #fff;
   text-decoration: none;
   transition-duration: 0.1s;
 }
 
-.primaryButton:disabled {
-  background-color: #fafbfc;
-  border-color: rgba(27, 31, 35, 0.15);
-  color: #959da5;
-  cursor: default;
-}
-
 .primaryButton:active {
-  background-color: #edeff2;
-  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  background-color: $active-color;
   transition: none 0s;
-}
-
-.primaryButton:focus {
-  outline: 1px transparent;
-}
-
-.primaryButton:before {
-  display: none;
-}
-
-.primaryButton:-webkit-details-marker {
-  display: none;
 }
