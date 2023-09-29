@@ -46,6 +46,10 @@ $loading-color: #3490ff;
     background-color: $loading-color !important;
   }
 
+  .loadingTextColor {
+    color: $input-placeholder-color;
+  }
+
   input {
     border: none;
     margin: 0;
