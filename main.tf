@@ -134,7 +134,7 @@ resource "aws_apigatewayv2_api" "lambda" {
 resource "aws_apigatewayv2_stage" "lambda" {
   api_id = aws_apigatewayv2_api.lambda.id
 
-  name        = "${var.environment}_serverless_lambda"
+  name        = "url-api"
   auto_deploy = true
 
   default_route_settings {

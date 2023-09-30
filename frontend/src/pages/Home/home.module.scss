@@ -76,7 +76,7 @@ $loading-color: #3490ff;
 .feedbackContainer {
   margin-top: 2rem;
 
-  @media only screen and (max-width: 950px) {
+  @media only screen and (max-width: 850px) {
     width: calc(100% - 1rem);
   }
 

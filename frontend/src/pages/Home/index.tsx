@@ -8,7 +8,7 @@ import styles from "./home.module.scss";
 
 const Home: FC = () => {
   const [url, setUrl] = useState<string>("");
-  const [shortUrl, setShortUrl] = useState<string | null>(null);
+  const [shortUrl, setShortUrl] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -21,6 +21,7 @@ const Home: FC = () => {
   const handleClick = async (): Promise<void> => {
     try {
       setLoading(true);
+      setShortUrl("");
       const res = await axios.post<{ shortUrl: string }>(shortUrlEndpoint, {
         url,
       });
@@ -43,7 +44,7 @@ const Home: FC = () => {
 
       <div className={styles.inputContainer}>
         <input
-          className={loading ? styles.loadingTextColor : ''}
+          className={loading ? styles.loadingTextColor : ""}
           type="text"
           value={url}
           onChange={handleUrlChange}
@@ -64,7 +65,7 @@ const Home: FC = () => {
           <Alert severity="success" className={styles.successAlert}>
             <div className={styles.successAlertContent}>
               <div>
-                Here's your short URL: <span>{shortUrl}</span>
+                Here's your "short" URL: <span>{shortUrl}</span>
               </div>
               <CopyIconButton copyValue={shortUrl} />
             </div>
