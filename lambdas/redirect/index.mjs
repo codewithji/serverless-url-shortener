@@ -4,6 +4,15 @@ import { DynamoDBDocumentClient, GetCommand } from "@aws-sdk/lib-dynamodb";
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
 
+const ensureProtocol = (url) => {
+  try {
+    new URL(url);
+    return url;
+  } catch (err) {
+    return `http://${url}`;
+  }
+}
+
 export const handler = async (event) => {
   const id = event.pathParameters.short_url_id;
 
@@ -14,11 +23,12 @@ export const handler = async (event) => {
 
   try {
     const res = await docClient.send(getCommand);
+    const longUrl = ensureProtocol(res.Item.longUrl);
 
     const response = {
       statusCode: 301,
       headers: {
-        Location: `${res.Item.longUrl}`,
+        Location: longUrl
       },
     };
 
